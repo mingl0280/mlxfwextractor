@@ -106,20 +106,20 @@ void SplitAllFw()
     const streampos end = fileIn.tellg();
     const ll file_len = end - begin;
     fileIn.seekg(0,ios::beg);
-    auto fileCache = new uchar[file_len];
-    fileIn.read(reinterpret_cast<char*>(fileCache), file_len);
+    const auto file_cache = new uchar[file_len];
+    fileIn.read(reinterpret_cast<char*>(file_cache), file_len);
     ull begin_pos = 0;
     ull end_pos;
     for (ll index = 0; index < file_len; index++)
     {
         if (index > 8 && index < file_len - 8)
         {
-            if (fileCache[index] == 0x4D && fileCache[index + 1] == 0x54)
+            if (file_cache[index] == 0x4D && file_cache[index + 1] == 0x54)
             {
                 uchar sig[8]{ 0 };
-                memcpy_s(&sig, 8, fileCache + index, 8);
+                memcpy_s(&sig, 8, file_cache + index, 8);
                 bool isSame = true;
-                for(int i=0;i<8;i++)
+                for(auto i=0;i<8;i++)
                 {
                     if (sig[i] != kSigTemplate[i])
                     {
@@ -131,7 +131,7 @@ void SplitAllFw()
                 {
                     cout << "Firmware file #" << n_fw_index << " complete, writing to bin file...";
                     end_pos = index - 1;
-                    WriteFirmwareFolder(fileCache, begin_pos, end_pos, n_fw_index);
+                    WriteFirmwareFolder(file_cache, begin_pos, end_pos, n_fw_index);
                     begin_pos = index;
                     n_fw_index++;
                     cout << FirmwareInfos[n_fw_index].PN << "complete. " << endl;
@@ -140,8 +140,8 @@ void SplitAllFw()
         }
     }
     end_pos = file_len;
-    WriteFirmwareFolder(fileCache, begin_pos, end_pos, n_fw_index);
-    delete[] fileCache;
+    WriteFirmwareFolder(file_cache, begin_pos, end_pos, n_fw_index);
+    delete[] file_cache;
 }
 
 void WriteFirmwareFolder(const uchar* file_cache, ll begin_pos, ll end_pos, int n_fw_index)
