@@ -29,9 +29,11 @@ rename these two xz files as fwSect1.xz and fwSect3.xz,  then unxz them.
 
 1. put the fwSect1 and fwSect3 in the same directory as the cpp file. 
 2. compile the executable: 
+   ```
    *nix:
-   `<g++-8|clang++> extractor.cpp -O2 -o extractor -std=c++17 -lstdc++fs`
+       <g++-8|clang++> extractor.cpp -O2 -o extractor -std=c++17 -lstdc++fs
    Windows:
-   Open the sln file and you know what to do.
-3. run the executable.
-4. Splited firmwares will be in the Firmwares/ directory named after there identification string.
+       Open the sln file and you know what to do.
+   ```
+4. run the executable.
+5. Splited firmwares will be in the Firmwares/ directory named after there identification string.
