@@ -32,6 +32,7 @@ rename these two xz files as fwSect1.xz and fwSect3.xz,  then unxz them.
    ```
    *nix:
        <g++-8|clang++> extractor.cpp -O2 -o extractor -std=c++17 -lstdc++fs
+       ...or you can run the build.sh
    Windows:
        Open the sln file and you know what to do.
    ```
